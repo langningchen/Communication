@@ -56,6 +56,7 @@ int main()
     ServerAddress.sin_family = AF_INET;
     ServerAddress.sin_addr.s_addr = htonl(INADDR_ANY);
     ServerAddress.sin_port = htons(SERVER_PORT);
+    ASSERT(setsockopt(ListenSocket, SOL_SOCKET, SO_REUSEADDR, (char *)&ServerAddress, sizeof(ServerAddress)) == 0);
     ASSERT(bind(ListenSocket, (sockaddr *)&ServerAddress, sizeof(ServerAddress)) == 0);
     ASSERT(listen(ListenSocket, 5) == 0);
     while (1)

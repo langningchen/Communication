@@ -16,6 +16,7 @@ int main()
 
     while (1)
     {
+        bool BreakFlag = false;
         char Function = 0;
         cout << "Please input: (\33[0;4mE\33[0mxit, \33[0;4mT\33[0mext)";
         Function = getchar();
@@ -32,6 +33,7 @@ int main()
         {
             SendMessage.DataType = SendMessage.GOODBYE;
             send(Socket, (char *)&SendMessage, sizeof(SendMessage), 0);
+            BreakFlag = true;
             break;
         }
         case 't':
@@ -49,6 +51,8 @@ int main()
         default:
             break;
         }
+        if (BreakFlag)
+            break;
     }
 
     close(Socket);
